@@ -37,6 +37,10 @@ LOCAL_CFLAGS           := $(common_flags) -DLOG_TAG=\"memalloc\"
 LOCAL_SRC_FILES        := alloc_controller.cpp
 ifeq ($(TARGET_USES_ION),true)
     LOCAL_SRC_FILES += ionalloc.cpp
+	ifeq ($(BOARD_USES_PMEM_ADSP),true)
+    LOCAL_SRC_FILES           += pmemalloc.cpp
+    LOCAL_CFLAGS              += -DUSE_PMEM_ADSP
+endif
 else
     LOCAL_SRC_FILES += ashmemalloc.cpp \
                        pmemalloc.cpp \
